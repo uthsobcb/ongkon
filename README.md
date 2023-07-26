@@ -27,7 +27,7 @@ The Drawing Web App is built using the following technologies:
 
 ## How to Use
 
-1. Visit the web app's URL (e.g., TBA) using a web browser.
+1. Visit the web app's URL (e.g., [Live Link](https://uthsobcb.github.io/ongkon/)) using a web browser.
 
 2. You will be presented with a canvas area and a toolbar with drawing options.
 
