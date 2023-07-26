@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অঙ্কন - ছবি আঁকাও মনের মত
+    </title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <section class="tools-board">
+            <div class="row colors">
+                <div class="title">রঙসমুহ</div>
+                <ul class="options">
+                    <li class="option"></li>
+                    <li class="option selected"></li>
+                    <li class="option"></li>
+                    <li class="option"></li>
+                    <li class="option">
+                        <input type="color" id="color-picker" value="#4A98F7">
+                    </li>
+                </ul>
+            </div>
+           
+            <div class="row">
+                <div class="title">রঙতুলি</div>
+                <ul class="options">
+                    <li class="option active tool" id="brush">
+                        <img class="icon" src="assets/brush.svg" alt="">
+                        <span>তুলি</span>
+                    </li>
+                    <li class="option tool" id="eraser">
+                        <img class="icon" src="assets/eraser.svg" alt="">
+                        <span>মুছনি</span>
+                    </li>
+                    <li class="option tool" id="size">
+                        <input type="range" id="size-slider" min="1" max="25" value="5">
+                        <label for="size-slider">তুলির গাঢ়ত্ব </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="title">আকৃতি</div>
+                <p>আকৃতিগুলো এখনো সম্পুর্ণ ব্যাবহার উপযোগী না। পরবর্তী আপডেটে আসবে।</p>
+                <ul class="options">
+                    <li class="option tool" id="circle">
+                        <img class="icon" src="assets/circle.svg" alt="">
+                        <span>বৃত্ত</span>
+                    </li>
+                    <li class="option tool" id="triangle">
+                        <img class="icon" src="assets/triangle.svg"> 
+                        <span>ত্রিভুজ</span>
+                    </li>
+                    <li class="option tool" id="rectangle">
+                        <img class="icon" src="assets/rectangle.svg">
+                        <span>চতুর্ভুজ</span>
+                    </li>
+                    <li class="option tool" id="">
+                        <input type="checkbox" name="" id="fill-color">
+                        <label for="fill-color">রঙীন করুন </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <button class="clear">চিত্রপট মুছুন</button>
+                <button class="save">ছবি সংরক্ষণ করি</button>
+            </div>
+        </section>
+        <section class="drawing-board">
+            <canvas></canvas>
+        </section>
+    </div>
+</body>
+</html>
