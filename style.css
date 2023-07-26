@@ -98,7 +98,8 @@ p{
 }
 .colors .option:nth-child(5){
   background-image: url(assets/cp.svg);
-  background-color: blueviolet;
+  background-size: cover;
+  background-position: center;
 }
 .colors .option.selected::before{
   position: absolute;
