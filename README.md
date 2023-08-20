@@ -15,6 +15,11 @@ It's yet another Paint app but in Web. You can draw freehanded. You can choose o
 
 - **Save Canvas:** A "ছবি সংরক্ষণ করি" button is available for save youur creation.
 
+## Upcoming
+- Mobile Support
+- Real time Colaborative
+- Shape Support
+
 ## Technologies Used
 
 The Drawing Web App is built using the following technologies:
