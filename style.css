@@ -26,6 +26,10 @@ section{
   border-radius: 7px;
 }
 
+.hamburger-icon-1, .hamburger-icon-2{
+  display: none;
+}
+
 .tools-board{
   width: 210px;
   padding: 15px 22px 0;
@@ -171,6 +175,7 @@ p{
   }
 
   .hamburger-icon-1, .hamburger-icon-2{
+    display: block;
     transition: ease-in-out 0.3s;
     position: absolute;
     top: 5px;

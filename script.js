@@ -9,7 +9,8 @@ const canvas = document.querySelector("canvas"),
     hamburgerMenu = document.getElementById("hamburger"),
     hamburgerIcon1 = document.getElementById("hamburger-icon-1"),
     hamburgerIcon2 = document.getElementById("hamburger-icon-2"),
-    toolsBoard = document.getElementById("tools-board");
+    toolsBoard = document.getElementById("tools-board"),
+    drawingBoard = document.getElementById("drawing-board");
 
 let pervMouseX, pervMouseY, snapshot,
     isDrawing = false,
@@ -17,11 +18,18 @@ let pervMouseX, pervMouseY, snapshot,
     selectedTool = "brush",
     selectedColor = "#000";
 
-window.addEventListener("load", () => {
-    canvas.height = canvas.offsetHeight;
-    canvas.width = canvas.offsetWidth;
-});
+    function windowResize() {
+        console.log(drawingBoard.clientWidth, drawingBoard.clientHeight);
+        canvas.width = drawingBoard.clientWidth;
+        canvas.height = drawingBoard.clientHeight;
+      };
 
+
+window.addEventListener("load", () => {
+    windowResize()
+});
+  
+// window.addEventListener('resize', windowResize);
 
 const startDraw = (e) => {
     isDrawing = true;
