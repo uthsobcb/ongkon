@@ -10,7 +10,12 @@
 </head>
 <body>
     <div class="container">
-        <section class="tools-board">
+
+        <div id="hamburger">
+            <img class="hamburger-icon-1" id="hamburger-icon-1" src="./assets/hamburger.svg" width="50px" height="50px"/>
+            <img class="hamburger-icon-2 hamburger-icon-2-closed" id="hamburger-icon-2" src="./assets/close.svg" width="30px" height="30px"/>
+        </div>
+        <section class="tools-board tools-board-closed" id="tools-board">
             <div class="row colors">
                 <div class="title">রঙসমুহ</div>
                 <ul class="options">
@@ -70,7 +75,7 @@
         </section>
         <section class="drawing-board">
             <canvas></canvas>
-        </section>
+        </section> 
     </div>
 </body>
 </html>
