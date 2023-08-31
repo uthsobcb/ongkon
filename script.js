@@ -18,7 +18,11 @@ window.addEventListener("load",() =>{
     canvas.height = canvas.offsetHeight;
     canvas.width = canvas.offsetWidth;
 });
+
+
 const startDraw = (e) => {
+    // console.log(e)
+    // console.log(ctx);
     isDrawing = true;
     ctx.beginPath();
     ctx.lineWidth = brushwidth;
@@ -37,9 +41,11 @@ const drawRect = (e) => {
 const drawing =(e) => {
     if(!isDrawing) return;
 
+    var rect = e.target.getBoundingClientRect();
+
     if(selectedTool === "brush" || selectedTool === "eraser"){
     ctx.strokeStyle  = selectedTool === "eraser" ? "#fff" : selectedColor;
-    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.lineTo(e.offsetX || e.targetTouches[0].pageX - rect.left, e.offsetY || e.targetTouches[0].pageY - rect.top);
     ctx.stroke();
     console.log(selectedTool);
     }
@@ -82,6 +88,10 @@ saveImg.addEventListener("click",()=>{
     link.click();
 })
 
-canvas.addEventListener("mousedown",startDraw);
-canvas.addEventListener("mousemove",drawing);
-canvas.addEventListener("mouseup", () => isDrawing=false);
+// canvas.addEventListener("mousedown",startDraw);
+// canvas.addEventListener("mousemove",drawing);
+// canvas.addEventListener("mouseup", () => isDrawing=false);
+
+canvas.addEventListener("touchstart",startDraw);
+canvas.addEventListener("touchmove",drawing);
+canvas.addEventListener("touchend", () => isDrawing=false);
