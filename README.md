@@ -11,12 +11,12 @@ It's yet another Paint app but in Web. You can draw freehanded. You can choose o
 
 - **Brush Size:** The app allows users to adjust the brush size, enabling them to create intricate details or broader strokes.
 
-- **Clear Canvas:** A "চিত্রপট মুছুন" button is available to clear the canvas and start fresh.
+- **Clear Canvas:** A "Clear" button is available to clear the canvas and start fresh.
 
-- **Save Canvas:** A "ছবি সংরক্ষণ করি" button is available for save youur creation.
+- **Save Canvas:** A "Save" button is available for save youur creation.
 
 ## Upcoming
-- Mobile Support
+- ~~Mobile/ Touch screen Support~~ 
 - Real time Colaborative
 - Shape Support
 
@@ -32,7 +32,7 @@ The Drawing Web App is built using the following technologies:
 
 ## How to Use
 
-1. Visit the web app's URL (e.g., [Live Link](https://uthsobcb.github.io/ongkon/)) using a web browser.
+1. Visit the web app's URL ([Live Link](https://uthsobcb.github.io/ongkon/)) using a web browser.
 
 2. You will be presented with a canvas area and a toolbar with drawing options.
 
@@ -42,9 +42,9 @@ The Drawing Web App is built using the following technologies:
 
 5. Start drawing on the canvas using your mouse or touch input (for touch-enabled devices).
 
-6. If you want to start over, click the "িত্রপট মুছুন" button to erase everything on the canvas.
+6. If you want to start over, click the "Clear" button to erase everything on the canvas.
 
-7. Save your masterpiece by site inbuilt function for save known as: "ছবি সংরক্ষণ করি" button. 
+7. Save your masterpiece by site inbuilt function for save known as: "Save" button. 
 
 ## Limitations
 It's not complete yet. Still shape is under development and strokes are not perfect. I'm working on it. Feel free to contribute and help me to make it happen.
@@ -72,5 +72,7 @@ If you are interested in contributing to the development of the Drawing Web App 
 7. Create a pull request to the main repository for review.
 
 ---
+
+Live Demmo Video: https://youtu.be/d5ZIL4PH6X8
 
 Happy drawing! The Project name picked from Bangla word Ongkon. It means drawing. As it's name in Bengali i decided to call all the tool in Bangla. Let your creativity flow, and have fun creating amazing artworks with the Ongkon! If you encounter any issues or have suggestions for improvements, please feel free to open an issue on the project repository.
