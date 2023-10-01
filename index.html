@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>অঙ্কন - ছবি আঁকাও মনের মত
+    <title>Ongkon - Yet another Whiteboard
     </title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
     <div class="container">
 
         <div id="hamburger">
-            <img class="hamburger-icon-1" id="hamburger-icon-1" src="./assets/hamburger.svg" width="50px" height="50px"/>
-            <img class="hamburger-icon-2 hamburger-icon-2-closed" id="hamburger-icon-2" src="./assets/close.svg" width="30px" height="30px"/>
+            <img class="hamburger-icon-1" id="hamburger-icon-1" src="./assets/hamburger.svg" width="50px"
+                height="50px" />
+            <img class="hamburger-icon-2 hamburger-icon-2-closed" id="hamburger-icon-2" src="./assets/close.svg"
+                width="30px" height="30px" />
         </div>
         <section class="tools-board tools-board-closed" id="tools-board">
             <div class="row colors">
-                <div class="title">রঙসমুহ</div>
+                <div class="title">Colors</div>
                 <ul class="options">
                     <li class="option"></li>
                     <li class="option selected"></li>
@@ -28,54 +32,55 @@
                     </li>
                 </ul>
             </div>
-           
+
             <div class="row">
-                <div class="title">রঙতুলি</div>
+                <div class="title">Tools</div>
                 <ul class="options">
                     <li class="option active tool" id="brush">
                         <img class="icon" src="assets/brush.svg" alt="">
-                        <span>তুলি</span>
+                        <span>Brush</span>
                     </li>
                     <li class="option tool" id="eraser">
                         <img class="icon" src="assets/eraser.svg" alt="">
-                        <span>মুছনি</span>
+                        <span>Eraser</span>
                     </li>
                     <li class="option tool" id="size">
                         <input type="range" id="size-slider" min="1" max="25" value="5">
-                        <label for="size-slider">তুলির গাঢ়ত্ব </label>
+                        <label for="size-slider">Width</label>
                     </li>
                 </ul>
             </div>
             <div class="row">
-                <div class="title">আকৃতি</div>
-                <p>আকৃতিগুলো এখনো সম্পুর্ণ ব্যাবহার উপযোগী না। পরবর্তী আপডেটে আসবে।</p>
+                <div class="title">Shapes</div>
+                <p>Shapes are not ready yet.</p>
                 <ul class="options">
                     <li class="option tool" id="circle">
                         <img class="icon" src="assets/circle.svg" alt="">
-                        <span>বৃত্ত</span>
+                        <span>Circle</span>
                     </li>
                     <li class="option tool" id="triangle">
-                        <img class="icon" src="assets/triangle.svg"> 
-                        <span>ত্রিভুজ</span>
+                        <img class="icon" src="assets/triangle.svg">
+                        <span>Triangle</span>
                     </li>
                     <li class="option tool" id="rectangle">
                         <img class="icon" src="assets/rectangle.svg">
-                        <span>চতুর্ভুজ</span>
+                        <span>Rectangle</span>
                     </li>
                     <li class="option tool" id="">
                         <input type="checkbox" name="" id="fill-color">
-                        <label for="fill-color">রঙীন করুন </label>
+                        <label for="fill-color">Fill Color</label>
                     </li>
                 </ul>
             </div>
             <div class="row">
-                <button class="clear">চিত্রপট মুছুন</button>
-                <button class="save">ছবি সংরক্ষণ করি</button>
+                <button class="clear">Clear</button>
+                <button class="save">Save</button>
             </div>
         </section>
         <section class="drawing-board" id="drawing-board">
             <canvas></canvas>
-        </section> 
+        </section>
     </div>
 </body>
+
 </html>
