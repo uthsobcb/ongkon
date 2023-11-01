@@ -18,7 +18,7 @@ It's yet another Paint app but in Web. You can draw freehanded. You can choose o
 ## Upcoming
 - ~~Mobile/ Touch screen Support~~ 
 - Real time Colaborative
-- Shape Support
+- ~~Shape Support~~
 
 ## Technologies Used
 
