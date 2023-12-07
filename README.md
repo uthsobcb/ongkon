@@ -3,7 +3,7 @@
 ### Ongkon means Drawing in Bangla
 It's yet another Paint app but in Web. You can draw freehanded. You can choose or pick planty of colour and draw with it, save your drawing.
 
-![Demo of Ongkon](/assets/image.png)
+![Ongkon Screenshot](assets/image.png)
 ## Features
 
 - **Canvas Drawing:** The app offers a canvas where users can draw using various tools, such as a pen, brush, and eraser.
@@ -17,9 +17,9 @@ It's yet another Paint app but in Web. You can draw freehanded. You can choose o
 - **Save Canvas:** A "Save" button is available for save youur creation.
 
 ## Upcoming
-[x] ~~Mobile/ Touch screen Support~~ 
-[x] Real time Colaborative
-[x] ~~Shape Support~~
+- ~~Mobile/ Touch screen Support~~ 
+- Real time Colaborative
+- ~~Shape Support~~
 
 ## Technologies Used
 
