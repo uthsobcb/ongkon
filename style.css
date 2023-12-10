@@ -35,11 +35,13 @@ section {
 .tools-board {
   position: absolute;
   top: 100px;
-  left: 0;
+  left: 25px;
+  padding: 10px;
   max-width: 210px;
   width: 100%;
-  height: 500px;
   z-index: 100;
+  border: solid 1px black;
+  border-radius: 10px;
   font-size: 20px;
 }
 
