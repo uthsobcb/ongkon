@@ -10,6 +10,8 @@ It's yet another Paint app but in Web. You can draw freehanded. You can choose o
 
 - **Color Selection:** Users can choose from a wide range of colors to use in their drawings.
 
+![Color Selection Screenshot](assets/copic.png)
+
 - **Brush Size:** The app allows users to adjust the brush size, enabling them to create intricate details or broader strokes.
 
 - **Clear Canvas:** A "Clear" button is available to clear the canvas and start fresh.
