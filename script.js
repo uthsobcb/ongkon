@@ -37,6 +37,7 @@ const startDraw = (e) => {
     prevMouseY = e.offsetY;
 };
 
+
 let isDrawingCircle = false;
 let isDrawingRectangle = false;
 let isDrawingTriangle = false;
@@ -278,10 +279,52 @@ saveImg.addEventListener("click", () => {
 canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("mouseup", () => isDrawing = false);
 
-// For Mobile Touches
-canvas.addEventListener("touchstart", startDraw);
-canvas.addEventListener("touchmove", drawing);
-canvas.addEventListener("touchend", () => isDrawing = false);
+// Touch Support 
+
+const startDrawTouch = (e) => {
+    e.preventDefault();
+    isDrawing = true;
+    ctx.beginPath();
+    ctx.lineWidth = brushWidth;
+    ctx.strokeStyle = selectedColor;
+    const touch = e.touches[0];
+    prevMouseX = touch.clientX - canvas.getBoundingClientRect().left;
+    prevMouseY = touch.clientY - canvas.getBoundingClientRect().top;
+};
+
+const drawTouch = (e) => {
+    e.preventDefault();
+    if (!isDrawing) return;
+    const touch = e.touches[0];
+    const offsetX = touch.clientX - canvas.getBoundingClientRect().left;
+    const offsetY = touch.clientY - canvas.getBoundingClientRect().top;
+
+    if (selectedTool === "brush" || selectedTool === "eraser") {
+        ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor;
+        ctx.lineTo(offsetX, offsetY);
+        ctx.stroke();
+        prevMouseX = offsetX;
+        prevMouseY = offsetY;
+    }
+};
+
+const endDrawTouch = () => {
+    isDrawing = false;
+};
+
+canvas.removeEventListener("touchstart", startDrawTouch);
+canvas.removeEventListener("touchmove", drawTouch);
+canvas.removeEventListener("touchend", endDrawTouch);
+
+canvas.addEventListener("touchstart", startDrawTouch);
+canvas.addEventListener("touchmove", drawTouch);
+canvas.addEventListener("touchend", endDrawTouch);
+
+
+
+canvas.removeEventListener("mousedown", startDraw);
+canvas.removeEventListener("mouseup", () => isDrawing = false);
+
 
 hamburgerMenu.addEventListener("click", () => {
     toolsBoard.classList.toggle("tools-board-closed");
