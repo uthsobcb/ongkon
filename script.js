@@ -286,6 +286,7 @@ const startDrawTouch = (e) => {
     e.preventDefault();
     isDrawing = true;
     ctx.beginPath();
+    ctx.imageSmoothingEnabled = true; 
     ctx.lineWidth = brushWidth;
     ctx.strokeStyle = selectedColor;
     const touch = e.touches[0];
