@@ -31,6 +31,7 @@ window.addEventListener("load", () => {
 const startDraw = (e) => {
     isDrawing = true;
     ctx.beginPath();
+    ctx.imageSmoothingEnabled = true; 
     ctx.lineWidth = brushWidth;
     ctx.strokeStyle = selectedColor;
     prevMouseX = e.offsetX;
