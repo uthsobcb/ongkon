@@ -27,6 +27,7 @@ function windowResize() {
 window.addEventListener("load", () => {
     windowResize();
 });
+window.onresize = windowResize;
 
 const startDraw = (e) => {
     isDrawing = true;
