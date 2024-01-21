@@ -14,6 +14,13 @@ const canvas = document.querySelector("canvas"),
 
 let prevMouseX, prevMouseY, isDrawing = false, brushWidth = 5, selectedTool = "brush", selectedColor = "#000";
 
+const setCanvasBackground = () => {
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = selectedColor;
+}
+
+
 // Store information about drawn circles, rectangles, and triangles
 let circles = [];
 let rectangles = [];
@@ -26,13 +33,14 @@ function windowResize() {
 
 window.addEventListener("load", () => {
     windowResize();
+    setCanvasBackground();
 });
 window.onresize = windowResize;
 
 const startDraw = (e) => {
     isDrawing = true;
     ctx.beginPath();
-    ctx.imageSmoothingEnabled = true; 
+    ctx.imageSmoothingEnabled = true;
     ctx.lineWidth = brushWidth;
     ctx.strokeStyle = selectedColor;
     prevMouseX = e.offsetX;
@@ -171,6 +179,7 @@ clearCanvas.addEventListener("click", () => {
     circles = [];
     rectangles = [];
     triangles = [];
+    setCanvasBackground();
 });
 
 // Additional functions to redraw existing shapes
@@ -264,13 +273,6 @@ colorPicker.addEventListener("change", () => {
     colorPicker.parentElement.style.background = colorPicker.value;
 });
 
-clearCanvas.addEventListener("click", () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    circles = [];
-    rectangles = [];
-    triangles = [];
-});
-
 saveImg.addEventListener("click", () => {
     const link = document.createElement("a");
     link.download = `${Date.now()}.png`;
@@ -287,7 +289,7 @@ const startDrawTouch = (e) => {
     e.preventDefault();
     isDrawing = true;
     ctx.beginPath();
-    ctx.imageSmoothingEnabled = true; 
+    ctx.imageSmoothingEnabled = true;
     ctx.lineWidth = brushWidth;
     ctx.strokeStyle = selectedColor;
     const touch = e.touches[0];
