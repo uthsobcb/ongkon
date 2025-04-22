@@ -11,6 +11,10 @@ const canvas = document.querySelector("canvas"),
     hamburgerIcon2 = document.getElementById("hamburger-icon-2"),
     toolsBoard = document.getElementById("tools-board"),
     drawingBoard = document.getElementById("drawing-board");
+const saveJsonBtn = document.getElementById("save-json");
+const loadJsonBtn = document.getElementById("load-json");
+const jsonDataArea = document.getElementById("json-data");
+
 
 let prevMouseX, prevMouseY, isDrawing = false, brushWidth = 5, selectedTool = "brush", selectedColor = "#000";
 
@@ -25,6 +29,9 @@ const setCanvasBackground = () => {
 let circles = [];
 let rectangles = [];
 let triangles = [];
+let data = { brushStrokes: [] }; // Initialize data with an empty brushStrokes array
+let brushStrokes = data.brushStrokes; // Store all freehand strokes
+let currentStroke = []; // Current stroke path
 
 function windowResize() {
     canvas.width = drawingBoard.clientWidth;
@@ -42,9 +49,18 @@ const startDraw = (e) => {
     ctx.beginPath();
     ctx.imageSmoothingEnabled = true;
     ctx.lineWidth = brushWidth;
-    ctx.strokeStyle = selectedColor;
+    ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor;
     prevMouseX = e.offsetX;
     prevMouseY = e.offsetY;
+
+    if (selectedTool === "brush" || selectedTool === "eraser") {
+        currentStroke = [{
+            x: prevMouseX,
+            y: prevMouseY,
+            color: ctx.strokeStyle,
+            width: ctx.lineWidth
+        }];
+    }
 };
 
 
@@ -141,6 +157,11 @@ canvas.addEventListener("mouseup", () => {
     isDrawingCircle = false;
     isDrawingRectangle = false;
     isDrawingTriangle = false;
+    if (currentStroke.length > 0) {
+        brushStrokes.push(currentStroke);
+        currentStroke = [];
+    }
+
     if (currentCircle) {
         // Store information about the completed circle
         circles.push(currentCircle);
@@ -179,6 +200,7 @@ clearCanvas.addEventListener("click", () => {
     circles = [];
     rectangles = [];
     triangles = [];
+    brushStrokes = [];
     setCanvasBackground();
 });
 
@@ -208,6 +230,20 @@ function redrawTriangles() {
         ctx.stroke();
     });
 }
+function redrawBrushStrokes() {
+    brushStrokes.forEach(stroke => {
+        if (stroke.length < 2) return;
+        ctx.beginPath();
+        ctx.strokeStyle = stroke[0].color || "#000";
+        ctx.lineWidth = stroke[0].width || 5;
+        ctx.moveTo(stroke[0].x, stroke[0].y);
+        for (let i = 1; i < stroke.length; i++) {
+            ctx.lineTo(stroke[i].x, stroke[i].y);
+        }
+        ctx.stroke();
+    });
+}
+
 
 const drawRect = (e) => {
     ctx.beginPath();
@@ -215,18 +251,22 @@ const drawRect = (e) => {
     const height = e.offsetY - prevMouseY;
     ctx.strokeRect(prevMouseX, prevMouseY, width, height);
 };
-
 const drawing = (e) => {
     e.preventDefault();
-
     if (!isDrawing) return;
 
     if (selectedTool === "brush" || selectedTool === "eraser") {
+        const x = e.offsetX;
+        const y = e.offsetY;
+
         ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor;
-        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.lineTo(x, y);
         ctx.stroke();
-        prevMouseX = e.offsetX;
-        prevMouseY = e.offsetY;
+
+        prevMouseX = x;
+        prevMouseY = y;
+
+        currentStroke.push({ x, y, color: ctx.strokeStyle, width: ctx.lineWidth });
     }
 };
 
@@ -335,4 +375,39 @@ hamburgerMenu.addEventListener("click", () => {
     toolsBoard.classList.toggle("tools-board-closed");
     hamburgerIcon1.classList.toggle("hamburger-icon-1-closed");
     hamburgerIcon2.classList.toggle("hamburger-icon-2-closed");
+});
+
+saveJsonBtn.addEventListener("click", () => {
+    const data = {
+        circles,
+        rectangles,
+        triangles,
+        brushStrokes
+    };
+    jsonDataArea.value = JSON.stringify(data, null, 2);
+});
+
+loadJsonBtn.addEventListener("click", () => {
+    try {
+        const data = JSON.parse(jsonDataArea.value);
+        if (data.circles && data.rectangles && data.triangles && data.brushStrokes) {
+            circles = data.circles;
+            rectangles = data.rectangles;
+            triangles = data.triangles;
+            brushStrokes = data.brushStrokes;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            setCanvasBackground();
+
+            redrawBrushStrokes();
+            redrawCircles();
+            redrawRectangles();
+            redrawTriangles();
+            redrawBrushStrokes();
+        } else {
+            alert("Invalid data format.");
+        }
+    } catch (e) {
+        alert("Invalid JSON.");
+    }
 });
