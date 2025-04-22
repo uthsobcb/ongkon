@@ -41,6 +41,24 @@ function windowResize() {
 window.addEventListener("load", () => {
     windowResize();
     setCanvasBackground();
+    const saved = localStorage.getItem("drawingData");
+    if (saved) {
+        try {
+            const data = JSON.parse(saved);
+            circles = data.circles || [];
+            rectangles = data.rectangles || [];
+            triangles = data.triangles || [];
+            brushStrokes = data.brushStrokes || [];
+
+            redrawBrushStrokes();
+            redrawCircles();
+            redrawRectangles();
+            redrawTriangles();
+        } catch (err) {
+            console.error("Failed to load saved drawing:", err);
+        }
+    }
+
 });
 window.onresize = windowResize;
 
@@ -138,6 +156,15 @@ const drawTriangle = (e) => {
         currentTriangle = { x1: prevMouseX, y1: prevMouseY, x2, y2, x3, y3 };
     }
 };
+function saveToLocal() {
+    const saveData = {
+        circles,
+        rectangles,
+        triangles,
+        brushStrokes
+    };
+    localStorage.setItem("drawingData", JSON.stringify(saveData));
+}
 
 canvas.addEventListener("mousedown", (e) => {
     startDraw(e);
@@ -175,6 +202,8 @@ canvas.addEventListener("mouseup", () => {
         triangles.push(currentTriangle);
         currentTriangle = null; // Reset the current triangle
     }
+    saveToLocal();
+
 });
 
 canvas.addEventListener("mousemove", (e) => {
