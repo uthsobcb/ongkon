@@ -230,6 +230,7 @@ clearCanvas.addEventListener("click", () => {
     rectangles = [];
     triangles = [];
     brushStrokes = [];
+    localStorage.removeItem("drawingData");
     setCanvasBackground();
 });
 
