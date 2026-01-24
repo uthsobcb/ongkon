@@ -36,7 +36,11 @@
             <div class="row">
                 <div class="title">Tools</div>
                 <ul class="options">
-                    <li class="option active tool" id="brush">
+                    <li class="option active tool" id="select">
+                        <img class="icon" src="assets/cursor.svg" alt="">
+                        <span>Select</span>
+                    </li>
+                    <li class="option tool" id="brush">
                         <img class="icon" src="assets/brush.svg" alt="">
                         <span>Brush</span>
                     </li>
@@ -91,6 +95,7 @@
         </section>
         <section class="drawing-board" id="drawing-board">
             <canvas></canvas>
+            <div id="zoom-indicator">100%</div>
         </section>
     </div>
 </body>

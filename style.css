@@ -7,6 +7,18 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
+}
+
+.cursor-move {
+  cursor: move;
+}
+
 body {
   display: flex;
   align-items: center;
@@ -198,6 +210,20 @@ p {
 .mid {
   display: flex;
   justify-content: center;
+}
+
+#zoom-indicator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1000;
 }
 
 @media screen and (max-width: 640px) {
