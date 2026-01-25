@@ -1,11 +1,14 @@
 export const state = {
     isDrawing: false,
     brushWidth: 5,
-    selectedTool: "select",
+    selectedTool: "brush",
     selectedColor: "#000",
+    isFilled: false,
     viewport: { x: 0, y: 0, zoom: 1 },
     isPanning: false,
     isDragging: false,
+    isResizing: false,
+    resizeHandle: null,
     lastMouseX: 0,
     lastMouseY: 0,
     circles: [],
@@ -33,6 +36,8 @@ export function resetState() {
     state.isDrawing = false;
     state.isPanning = false;
     state.isDragging = false;
+    state.isResizing = false;
+    state.resizeHandle = null;
 }
 
 export function loadState(data) {

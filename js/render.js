@@ -1,4 +1,5 @@
 import { state } from './state.js';
+import { getResizeHandleRects } from './utils.js';
 
 let canvas, ctx, zoomIndicator;
 
@@ -62,7 +63,9 @@ const drawCirclePath = (circle) => {
     ctx.beginPath();
     ctx.lineWidth = state.brushWidth; // Note: Original used global brushWidth for all shapes. To fix this, store width in shape.
     ctx.strokeStyle = circle.color || "#000";
+    ctx.fillStyle = circle.color || "#000";
     ctx.arc(circle.centerX, circle.centerY, circle.radius, 0, 2 * Math.PI);
+    if (circle.isFilled) ctx.fill();
     ctx.stroke();
 };
 
@@ -70,6 +73,8 @@ const drawRectPath = (rect) => {
     ctx.beginPath();
     ctx.lineWidth = state.brushWidth;
     ctx.strokeStyle = rect.color || "#000";
+    ctx.fillStyle = rect.color || "#000";
+    if (rect.isFilled) ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
     ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
 };
 
@@ -77,10 +82,12 @@ const drawTrianglePath = (tri) => {
     ctx.beginPath();
     ctx.lineWidth = state.brushWidth;
     ctx.strokeStyle = tri.color || "#000";
+    ctx.fillStyle = tri.color || "#000";
     ctx.moveTo(tri.x1, tri.y1);
     ctx.lineTo(tri.x2, tri.y2);
     ctx.lineTo(tri.x3, tri.y3);
     ctx.closePath();
+    if (tri.isFilled) ctx.fill();
     ctx.stroke();
 };
 
@@ -120,4 +127,20 @@ const drawSelectionHighlight = (el) => {
         }
     }
     ctx.restore();
+
+    // Draw Handles
+    if (el.type !== 'brush') {
+        const handles = getResizeHandleRects(el);
+        if (handles) {
+            ctx.fillStyle = "#fff";
+            ctx.strokeStyle = "#4A98F7";
+            ctx.lineWidth = 1 / state.viewport.zoom;
+
+            [handles.tl, handles.tr, handles.bl, handles.br].forEach(h => {
+                ctx.beginPath();
+                ctx.fillRect(h.x, h.y, h.w, h.h);
+                ctx.strokeRect(h.x, h.y, h.w, h.h);
+            });
+        }
+    }
 };

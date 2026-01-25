@@ -8,6 +8,7 @@ const canvas = document.querySelector("canvas"),
     sizeSlider = document.querySelector("#size-slider"),
     colorBtns = document.querySelectorAll(".colors .option"),
     colorPicker = document.querySelector("#color-picker"),
+    fillColor = document.querySelector("#fill-color"),
     clearCanvas = document.querySelector(".clear"),
     saveImg = document.querySelector(".save"),
     hamburgerMenu = document.getElementById("hamburger"),
@@ -30,8 +31,8 @@ window.addEventListener("load", () => {
 
     // Default tool selection in UI
     document.querySelector(".options .active").classList.remove("active");
-    document.getElementById("select").classList.add("active");
-    setState({ selectedTool: "select" });
+    document.getElementById("brush").classList.add("active");
+    setState({ selectedTool: "brush" });
 
     // Load saved data
     const saved = localStorage.getItem("drawingData");
@@ -91,7 +92,12 @@ colorBtns.forEach(btn => {
 
 colorPicker.addEventListener("change", () => {
     colorPicker.parentElement.style.background = colorPicker.value;
+    colorPicker.parentElement.style.background = colorPicker.value;
     setState({ selectedColor: colorPicker.value });
+});
+
+fillColor.addEventListener("change", () => {
+    setState({ isFilled: fillColor.checked });
 });
 
 saveImg.addEventListener("click", () => {

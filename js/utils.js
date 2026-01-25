@@ -15,9 +15,6 @@ export const toScreen = (worldX, worldY) => {
 };
 
 export const isPointInCircle = (x, y, circle) => {
-    // Need access to brushWidth if it's dynamic per shape, but currently it's global or stored.
-    // Ideally shape has its own width. Code used global brushWidth for hit test which is imperfect if shapes have different widths.
-    // For now we use the global state.brushWidth or a default.
     return Math.sqrt((x - circle.centerX) ** 2 + (y - circle.centerY) ** 2) <= circle.radius + state.brushWidth / 2;
 };
 
@@ -90,5 +87,58 @@ export const findObjectAt = (wx, wy) => {
     for (let i = state.brushStrokes.length - 1; i >= 0; i--) {
         if (isPointNearStroke(wx, wy, state.brushStrokes[i])) return { type: 'brush', index: i };
     }
+    return null;
+};
+
+// --- Resize Helpers ---
+
+export const getResizeHandleRects = (element) => {
+    let bbox = { x: 0, y: 0, w: 0, h: 0 };
+
+    if (element.type === 'circle') {
+        const obj = state.circles[element.index];
+        bbox.x = obj.centerX - obj.radius;
+        bbox.y = obj.centerY - obj.radius;
+        bbox.w = obj.radius * 2;
+        bbox.h = obj.radius * 2;
+    } else if (element.type === 'rectangle') {
+        const obj = state.rectangles[element.index];
+        bbox.x = obj.x;
+        bbox.y = obj.y;
+        bbox.w = obj.width;
+        bbox.h = obj.height;
+    } else if (element.type === 'triangle') {
+        // Triangle resize is complex, disabling for now.
+        return null;
+    } else {
+        return null;
+    }
+
+    // Normalize width/height if negative (mostly for rects created backwards)
+    if (bbox.w < 0) { bbox.x += bbox.w; bbox.w = Math.abs(bbox.w); }
+    if (bbox.h < 0) { bbox.y += bbox.h; bbox.h = Math.abs(bbox.h); }
+
+    const handleSize = 8 / state.viewport.zoom;
+    const half = handleSize / 2;
+
+    return {
+        tl: { x: bbox.x - half, y: bbox.y - half, w: handleSize, h: handleSize },
+        tr: { x: bbox.x + bbox.w - half, y: bbox.y - half, w: handleSize, h: handleSize },
+        bl: { x: bbox.x - half, y: bbox.y + bbox.h - half, w: handleSize, h: handleSize },
+        br: { x: bbox.x + bbox.w - half, y: bbox.y + bbox.h - half, w: handleSize, h: handleSize }
+    };
+};
+
+export const getHandleAt = (wx, wy, element) => {
+    const handles = getResizeHandleRects(element);
+    if (!handles) return null;
+
+    const hit = (h) => wx >= h.x && wx <= h.x + h.w && wy >= h.y && wy <= h.y + h.h;
+
+    if (hit(handles.tl)) return 'tl';
+    if (hit(handles.tr)) return 'tr';
+    if (hit(handles.bl)) return 'bl';
+    if (hit(handles.br)) return 'br';
+
     return null;
 };
