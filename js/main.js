@@ -100,6 +100,14 @@ fillColor.addEventListener("change", () => {
     setState({ isFilled: fillColor.checked });
 });
 
+const gridCheckbox = document.getElementById("grid-checkbox");
+if (gridCheckbox) {
+    gridCheckbox.addEventListener("change", () => {
+        setState({ isGridEnabled: gridCheckbox.checked });
+        render();
+    });
+}
+
 saveImg.addEventListener("click", () => {
     const link = document.createElement("a");
     link.download = `ongkon-${Date.now()}.png`;

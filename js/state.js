@@ -18,6 +18,8 @@ export const state = {
     currentStroke: [],
     currentShape: null,
     selectedElement: null,
+    isGridEnabled: true,
+    gridSize: 40,
 };
 
 export function setState(newState) {

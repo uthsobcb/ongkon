@@ -20,6 +20,13 @@ export const render = () => {
     // Apply Viewport Transform
     ctx.setTransform(state.viewport.zoom, 0, 0, state.viewport.zoom, state.viewport.x, state.viewport.y);
 
+    // Draw Grid (Bottom Layer)
+    if (state.isGridEnabled) {
+        drawGrid();
+    }
+
+
+
     // Draw All Types
     // 1. Brush Strokes
     state.brushStrokes.forEach(stroke => drawStrokePath(stroke));
@@ -143,4 +150,30 @@ const drawSelectionHighlight = (el) => {
             });
         }
     }
+};
+
+const drawGrid = () => {
+    const gridSize = state.gridSize;
+    const { x, y, zoom } = state.viewport;
+
+    // Calculate visible area in world coordinates
+    const startX = Math.floor((-x / zoom) / gridSize) * gridSize;
+    const endX = Math.ceil(((canvas.width - x) / zoom) / gridSize) * gridSize;
+    const startY = Math.floor((-y / zoom) / gridSize) * gridSize;
+    const endY = Math.ceil(((canvas.height - y) / zoom) / gridSize) * gridSize;
+
+    ctx.save();
+    ctx.fillStyle = "#ccc"; // Dot color
+
+    const dotSize = 2 / zoom; // 2px world size approx
+
+    for (let gx = startX; gx <= endX; gx += gridSize) {
+        for (let gy = startY; gy <= endY; gy += gridSize) {
+            ctx.beginPath();
+            ctx.arc(gx, gy, 1 / zoom, 0, 2 * Math.PI); // 1px radius world space (scales with zoom)
+            ctx.fill();
+        }
+    }
+
+    ctx.restore();
 };
